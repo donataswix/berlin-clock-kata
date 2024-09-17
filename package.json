@@ -6,8 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/kata.mjs < data/input.txt | node scripts/check.mjs data/gold.txt",
-    "watch": "chokidar data/gold.txt data/input.txt src/kata.mjs -c 'npm start'"
-
+    "watch": "npm start && chokidar data/gold.txt data/input.txt src/kata.mjs -c 'npm start'"
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0"
