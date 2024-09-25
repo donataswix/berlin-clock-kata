@@ -9,7 +9,7 @@ function toBerlinClock(line) {
 
   const seconds = s % 2 === 0 ? '.' : 'X'
 
-  const hours1 = 'X'.repeat(Math.floor(h / 5)).padEnd(4, '.')
+  const hours1 = repeat('X', Math.floor(h / 5)).padEnd(4, '.');
   const hours2 = 'X'.repeat(h % 5).padEnd(4, '.')
 
   const minutes1 = 'XX|'.repeat(4).substring(0, Math.floor(m / 5)) + '.'.repeat(11 - Math.floor(m / 5))
@@ -25,6 +25,13 @@ function substring(str, k, l) {
 }
 
 function repeat(str, n) {
+  const finalState = unfold(['', 0], ([k, i]) => {
+    if (i < n) {
+      return [k+str, ++i]
+    }
+    return false;
+  })
+  return finalState[0]
 }
 
 function unfold(state, fn) {
@@ -33,6 +40,10 @@ function unfold(state, fn) {
 }
 
 function join(sep, array) {
+  return reduce((acc, x) => {
+    return acc +  sep + x;
+  }, tail(array), array[0])
+ 
 }
 
 function split(c, string) {
